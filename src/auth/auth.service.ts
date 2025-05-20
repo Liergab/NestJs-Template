@@ -19,6 +19,15 @@ export class AuthService {
     private jwtService: JwtService,
   ) {}
 
+  getCurrentUser(user: User): UserWithoutPassword {
+    if (!user) {
+      throw new UnauthorizedException('User not found');
+    }
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const { password: _, ...userWithoutPassword } = user;
+    return userWithoutPassword;
+  }
+
   async register(
     registerDto: RegisterDto,
   ): Promise<{ message: string; user: UserWithoutPassword; token: string }> {

@@ -6,15 +6,23 @@ import {
   HttpStatus,
   Res,
   BadRequestException,
+  Get,
 } from '@nestjs/common';
 import { Response } from 'express';
 import { AuthService } from './auth.service';
 import { RegisterDto } from './dto/register.dto';
 import { LoginDto } from './dto/login.dto';
+import { GetUser } from './decorators/user.decorator';
+import { User } from '@prisma/client';
 
 @Controller('auth')
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
+
+  @Get('me')
+  getCurrentUser(@GetUser() user: User) {
+    return this.authService.getCurrentUser(user);
+  }
 
   @Post('register')
   async register(
