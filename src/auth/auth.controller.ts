@@ -12,7 +12,7 @@ import { Response } from 'express';
 import { AuthService } from './auth.service';
 import { RegisterDto } from './dto/register.dto';
 import { LoginDto } from './dto/login.dto';
-import { GetUser } from './decorators/user.decorator';
+import { GetUser } from '../common/decorators/user.decorator';
 import { User } from '@prisma/client';
 
 @Controller('auth')
